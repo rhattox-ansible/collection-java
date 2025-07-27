@@ -6,3 +6,9 @@
 
 - name: Extract tar file
   ansible.builtin.include_tasks: extract_tar.yaml
+
+- name: Copy file
+  ansible.builtin.include_tasks: copy_file.yaml
+
+- name: Set Profile
+  ansible.builtin.include_tasks: set_profile.yaml

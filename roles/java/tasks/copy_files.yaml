@@ -1,0 +1,25 @@
+---
+- name: Create java directory
+  ansible.builtin.file:
+    path: "{{ java_installation_path }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ ansible_env.SUDO_USER }}"
+    group: "{{ ansible_env.SUDO_USER }}"
+
+- name: Find Java installation directory
+  ansible.builtin.find:
+    paths: "{{ tmp_path }}/java-{{ java_version }}"
+    file_type: directory
+    recurse: false
+  register: java_dir
+
+- name: Copy java installation folder
+  ansible.builtin.copy:
+    src: "{{ item.path }}/"
+    dest: "{{ java_installation_path }}"
+    remote_src: true
+    mode: "0755"
+    owner: "{{ ansible_env.SUDO_USER }}"
+    group: "{{ ansible_env.SUDO_USER }}"
+  loop: "{{ java_dir.files }}"

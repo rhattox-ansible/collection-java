@@ -1,0 +1,33 @@
+---
+- name: Ensure /usr/local/bin exists
+  ansible.builtin.file:
+    path: /usr/local/bin
+    state: directory
+    mode: "0755"
+
+- name: Find Java installation binaries
+  ansible.builtin.find:
+    paths: "{{ java_installation_path }}/bin/"
+    file_type: file
+    recurse: true
+  register: java_bin
+
+- name: Create a symlink
+  become: true
+  loop: "{{ java_bin.files }}"
+  ansible.builtin.file:
+    src: "{{ item.path }}"
+    dest: "/usr/local/bin/{{ item.name }}"
+    state: link
+    force: true
+
+- name: Create /etc/profile.d/java.sh
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/profile.d/java.sh
+    content: |
+      export JAVA_HOME={{ java_installation_path }}
+      export PATH=$JAVA_HOME/bin:$PATH
+    owner: root
+    group: root
+    mode: "0755"
