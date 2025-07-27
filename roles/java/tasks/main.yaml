@@ -3,3 +3,6 @@
 
 - name: Download tar file
   ansible.builtin.include_tasks: download_tar.yaml
+
+- name: Extract tar file
+  ansible.builtin.include_tasks: extract_tar.yaml
