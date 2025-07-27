@@ -1,2 +1,2 @@
-# colletion-java
-Ansible Colletion For Java Installation
+# collection-java
+Ansible Collection For Java Installation
