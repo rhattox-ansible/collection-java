@@ -1,0 +1,8 @@
+namespace: rhattox
+name: java_installation
+version: 0.0.1
+readme: README.md
+authors:
+  - rhattox
+description: Java Installation
+license: MIT

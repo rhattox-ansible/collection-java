@@ -1,0 +1,6 @@
+java_version: 17
+java_url: https://corretto.aws/downloads/latest/amazon-corretto-{{ java_version }}-x64-linux-jdk.tar.gz
+java_installation_path: /opt/java-{{ java_version }}
+java_binary_path: /usr/local/bin/java-{{ java_version }}
+
+tmp_path: /tmp/collection-java

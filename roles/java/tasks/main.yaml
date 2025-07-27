@@ -1,0 +1,5 @@
+- name: Create temp directory
+  ansible.builtin.include_tasks: create_tmp_folder.yaml
+
+- name: Download tar file
+  ansible.builtin.include_tasks: download_tar.yaml

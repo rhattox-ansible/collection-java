@@ -1,0 +1,8 @@
+---
+- name: "Download Java Corretto Version {{ java_version }}"
+  ansible.builtin.get_url:
+    url: "{{ java_url }}"
+    dest: "{{ tmp_path }}/java-{{ java_version }}.tar.gz"
+    mode: "0755"
+    owner: "{{ ansible_env.SUDO_USER }}"
+    group: "{{ ansible_env.SUDO_USER }}"
