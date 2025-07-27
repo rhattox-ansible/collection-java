@@ -43,10 +43,10 @@
     - name: Check if java profile exists
       register: java_profile_path_stat
       ansible.builtin.stat:
-        path: "/etc/profile.d/java.sh"
+        path: "{{ java_profile_path }}"
 
     - name: Delete java installation path
       when: java_profile_path_stat.stat.exists
       ansible.builtin.file:
-        path: "/etc/profile.d/java.sh"
+        path: "{{ java_profile_path }}"
         state: absent

@@ -9,7 +9,7 @@
 
 - name: Find Java installation directory
   ansible.builtin.find:
-    paths: "{{ tmp_path }}/java-{{ java_version }}"
+    paths: "{{ tmp_path_java }}"
     file_type: directory
     recurse: false
   register: java_dir

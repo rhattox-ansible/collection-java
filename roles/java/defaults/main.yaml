@@ -1,6 +1,10 @@
+tmp_path: /tmp/collection-java
+tmp_path_java: "{{ tmp_path }}/java-{{ java_version }}"
+tmp_path_java_tar: "{{ tmp_path }}/java-{{ java_version }}.tar.gz"
+
 java_version: 17
 java_url: https://corretto.aws/downloads/latest/amazon-corretto-{{ java_version }}-x64-linux-jdk.tar.gz
 java_installation_path: /opt/java-{{ java_version }}
 java_binary_path: /usr/local/bin/java-{{ java_version }}
 
-tmp_path: /tmp/collection-java
+java_profile_path: "/etc/profile.d/java.sh"

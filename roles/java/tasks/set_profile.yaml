@@ -21,10 +21,10 @@
     state: link
     force: true
 
-- name: Create /etc/profile.d/java.sh
+- name: Create "{{ java_profile_path }}"
   become: true
   ansible.builtin.copy:
-    dest: /etc/profile.d/java.sh
+    dest: "{{ java_profile_path }}"
     content: |
       export JAVA_HOME={{ java_installation_path }}
       export PATH=$JAVA_HOME/bin:$PATH

@@ -1,7 +1,7 @@
 ---
 - name: Create tmp java directory
   ansible.builtin.file:
-    path: "{{ tmp_path }}/java-{{ java_version }}"
+    path: "{{ tmp_path_java }}"
     state: directory
     mode: "0755"
     owner: "{{ ansible_env.SUDO_USER }}"
@@ -9,8 +9,8 @@
 
 - name: Extract Java
   ansible.builtin.unarchive:
-    src: "{{ tmp_path }}/java-{{ java_version }}.tar.gz"
-    dest: "{{ tmp_path }}/java-{{ java_version }}"
+    src: "{{ tmp_path_java_tar }}"
+    dest: "{{ tmp_path_java }}"
     mode: "0755"
     owner: "{{ ansible_env.SUDO_USER }}"
     group: "{{ ansible_env.SUDO_USER }}"
