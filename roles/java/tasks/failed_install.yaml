@@ -28,7 +28,7 @@
     - name: Unlink Java binaries from /usr/local/bin
       when: java_installation_path_stat.stat.exists
       ansible.builtin.file:
-        path: "/usr/local/bin/{{ item.name }}"
+        path: "/usr/local/bin/{{ item.path | basename }}"
         state: absent
       loop: "{{ java_bin.files }}"
 

@@ -17,7 +17,7 @@
   loop: "{{ java_bin.files }}"
   ansible.builtin.file:
     src: "{{ item.path }}"
-    dest: "/usr/local/bin/{{ item.name }}"
+    dest: "/usr/local/bin/{{ item.path | basename }}"
     state: link
     force: true
 
