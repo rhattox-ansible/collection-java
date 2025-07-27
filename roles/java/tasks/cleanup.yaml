@@ -1,0 +1,6 @@
+---
+- name: Cleanup installation
+  ansible.builtin.file:
+    path: "{{ tmp_path }}"
+    state: absent
+    force: true

@@ -1,0 +1,52 @@
+---
+- name: Java Temp Path
+  block:
+    - name: Check if java temp path exists
+      ansible.builtin.stat:
+        path: "{{ tmp_path }}"
+      register: java_tmp_path_stat
+
+    - name: Cleanup
+      when: java_tmp_path_stat.stat.exists
+      ansible.builtin.include_tasks: cleanup.yaml
+
+- name: Java Installation Dir
+  block:
+    - name: Check if java installation path exists
+      ansible.builtin.stat:
+        path: "{{ java_installation_path }}"
+      register: java_installation_path_stat
+
+    - name: Find Java installation directory
+      when: java_installation_path_stat.stat.exists
+      ansible.builtin.find:
+        paths: "{{ java_installation_path }}/bin"
+        file_type: file
+        recurse: true
+      register: java_bin
+
+    - name: Unlink Java binaries from /usr/local/bin
+      when: java_installation_path_stat.stat.exists
+      ansible.builtin.file:
+        path: "/usr/local/bin/{{ item.name }}"
+        state: absent
+      loop: "{{ java_bin.files }}"
+
+    - name: Delete java installation path
+      when: java_installation_path_stat.stat.exists
+      ansible.builtin.file:
+        path: "{{ java_installation_path }}"
+        state: absent
+
+- name: Java Profile
+  block:
+    - name: Check if java profile exists
+      register: java_profile_path_stat
+      ansible.builtin.stat:
+        path: "/etc/profile.d/java.sh"
+
+    - name: Delete java installation path
+      when: java_profile_path_stat.stat.exists
+      ansible.builtin.file:
+        path: "/etc/profile.d/java.sh"
+        state: absent
